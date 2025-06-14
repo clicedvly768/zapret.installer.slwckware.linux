@@ -668,7 +668,7 @@ update_zapret_menu(){
 
 update_zapret() {
     if [[ -d /opt/zapret ]]; then
-        cd /opt/zapret && git fetch origin main; git reset --hard origin/main
+        cd /opt/zapret && git fetch origin master; git reset --hard origin/master
     fi
     if [[ -d /opt/zapret/zapret.cfgs ]]; then
         cd /opt/zapret/zapret.cfgs && git fetch origin main; git reset --hard origin/main
