@@ -17,7 +17,7 @@ install_dependencies() {
                 fedora)    echo "$SUDO dnf check-update -y && $SUDO dnf install -y git" ;;
                 void)      echo "$SUDO xbps-install -S && $SUDO xbps-install -y git" ;;
                 gentoo)    echo "$SUDO emerge --sync --quiet && $SUDO emerge --ask=n dev-vcs/git app-shells/bash" ;;
-                opensuse)  echo "$SUDO zypper refresh -y && $SUDO zypper install -y git" ;;
+                opensuse)  echo "$SUDO zypper refresh && $SUDO zypper install git" ;;
                 openwrt)   echo "$SUDO opkg update && $SUDO opkg install git git-http bash" ;;
                 altlinux)  echo "$SUDO apt-get update -y && $SUDO apt-get install -y git bash" ;;
                 *)         echo "" ;;

@@ -364,7 +364,7 @@ install_dependencies() {
             ["centos"]="yum install -y ipset iptables"
             ["void"]="xbps-install -y iptables ipset"
             ["gentoo"]="emerge net-firewall/iptables net-firewall/ipset"
-            ["opensuse"]="zypper install -y iptables ipset"
+            ["opensuse"]="zypper install iptables ipset"
             ["openwrt"]="opkg install iptables ipset"
             ["altlinux"]="apt-get install -y iptables ipset"
         )
