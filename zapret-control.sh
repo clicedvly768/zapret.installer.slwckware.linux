@@ -539,9 +539,9 @@ install_zapret() {
             [Yy]* ) 
                 if [[ -f /opt/zapret/uninstall_easy.sh ]]; then
                     cd /opt/zapret
-                    sed -i '235s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
+                    sed -i '238s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
                     yes "" | ./uninstall_easy.sh
-                    sed -i '235s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
+                    sed -i '238s/ask_yes_no Y/ask_yes_no N/' /opt/zapret/common/installer.sh
                 fi
                 rm -rf /opt/zapret
                 echo "Удаляю zapret..."
@@ -581,9 +581,9 @@ install_zapret() {
     cp -r /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1/binaries/ /opt/zapret/binaries
 
     cd /opt/zapret
-    sed -i '235s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
+    sed -i '238s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
     yes "" | ./install_easy.sh
-    sed -i '235s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
+    sed -i '238s/ask_yes_no Y/ask_yes_no N/' /opt/zapret/common/installer.sh
     cp -r /opt/zapret.installer/zapret-control.sh /bin/zapret || error_exit "не удалось скопировать скрипт в /bin" 
     chmod +x /bin/zapret
     rm -f /opt/zapret/config 
