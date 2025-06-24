@@ -584,6 +584,7 @@ install_zapret() {
     sed -i '238s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
     yes "" | ./install_easy.sh
     sed -i '238s/ask_yes_no Y/ask_yes_no N/' /opt/zapret/common/installer.sh
+    rm -f /bin/zapret
     cp -r /opt/zapret.installer/zapret-control.sh /bin/zapret || error_exit "не удалось скопировать скрипт в /bin" 
     chmod +x /bin/zapret
     rm -f /opt/zapret/config 
@@ -594,6 +595,9 @@ install_zapret() {
 
     cp -r /opt/zapret/zapret.cfgs/lists/ipset-discord.txt /opt/zapret/ipset/ipset-discord.txt || error_exit "не удалось автоматически скопировать ипсет"
     
+    if [[ INIT_SYSTEM = systemd ]]; then
+        systemctl daemon-reload
+    fi
     if [[ INIT_SYSTEM = runit ]]; then
         read -p "Для окончания установки необходимо перезапустить ваше устройство. Перезапустить его сейчас? (Y/n): " answer
         case "$answer" in
