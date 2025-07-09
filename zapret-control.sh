@@ -1,23 +1,10 @@
 #!/bin/bash
 
-if [ -f "$(dirname "$0")/files/utils.sh" ]; then
-    source "$(dirname "$0")/files/utils.sh"
-fi
-if [ -f "$(dirname "$0")/files/init.sh" ]; then
-    source "$(dirname "$0")/files/init.sh"
-fi
-if [ -f "$(dirname "$0")/files/service.sh" ]; then
-    source "$(dirname "$0")/files/service.sh"
-fi
-if [ -f "$(dirname "$0")/files/install.sh" ]; then
-    source "$(dirname "$0")/files/install.sh"
-fi
-if [ -f "$(dirname "$0")/files/config.sh" ]; then
-    source "$(dirname "$0")/files/config.sh"
-fi
-if [ -f "$(dirname "$0")/files/menu.sh" ]; then
-    source "$(dirname "$0")/files/menu.sh"
-fi
+source "/opt/zapret.installer/files/utils.sh"
+source "/opt/zapret.installer/files/config.sh"
+source "/opt/zapret.installer/files/init.sh"
+source "/opt/zapret.installer/files/menu.sh"
+source "/opt/zapret.installer/files/service.sh"
 
 set -e  
 
