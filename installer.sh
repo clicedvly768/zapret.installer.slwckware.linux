@@ -8,18 +8,19 @@ install_dependencies() {
     if [ "$kernel" = "Linux" ]; then
         [ -f /etc/os-release ] && . /etc/os-release || { echo "Не удалось определить ОС"; exit 1; }
 
-        SUDO="${SUDO:-}"
+        SUDO="${SUDO:-}"t
 
         find_package_manager() {
             case "$1" in
-                arch|artix)      echo "$SUDO pacman -Syu --noconfirm && $SUDO pacman -S --noconfirm git" ;;
+                arch|artix|cachyos|endeavouros|manjaro|garuda) echo "$SUDO pacman -Syu --noconfirm && $SUDO pacman -S --noconfirm git" ;;
                 debian|ubuntu|mint) echo "$SUDO apt update -y && $SUDO apt install -y git" ;;
-                fedora)    echo "$SUDO dnf check-update -y && $SUDO dnf install -y git" ;;
+                fedora|almalinux|rocky) echo "$SUDO dnf check-update -y && $SUDO dnf install -y git" ;;
                 void)      echo "$SUDO xbps-install -S && $SUDO xbps-install -y git" ;;
                 gentoo)    echo "$SUDO emerge --sync --quiet && $SUDO emerge --ask=n dev-vcs/git app-shells/bash" ;;
                 opensuse)  echo "$SUDO zypper refresh && $SUDO zypper install git" ;;
                 openwrt)   echo "$SUDO opkg update && $SUDO opkg install git git-http bash" ;;
                 altlinux)  echo "$SUDO apt-get update -y && $SUDO apt-get install -y git bash" ;;
+                alpine)    echo "$SUDO apk update && $SUDO apk add git bash" ;;
                 *)         echo "" ;;
             esac
         }

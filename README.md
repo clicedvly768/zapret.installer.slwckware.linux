@@ -26,12 +26,13 @@ zapret
 На данный момент поддерживаются дистрибутивы:  
 - Debian, Ubuntu, Mint
 - Fedora
-- Arch Linux, Artix Linux
+- Arch Linux, Artix Linux (и их производные)
 - Alt Linux
 - Void Linux
 - Gentoo Linux
 - OpenWrt
 - OpenSUSE
+- Aipline Linux
 
 > [!IMPORTANT]
 > Системы инициализации *runit*, *OpenRC* и *SysVinit* поддерживаются только частично.
