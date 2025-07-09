@@ -1,22 +1,22 @@
 #!/bin/bash
 
-if [ -f "$(dirname "$0")/lib/utils.sh" ]; then
-    source "$(dirname "$0")/lib/utils.sh"
+if [ -f "$(dirname "$0")/files/utils.sh" ]; then
+    source "$(dirname "$0")/files/utils.sh"
 fi
-if [ -f "$(dirname "$0")/lib/init.sh" ]; then
-    source "$(dirname "$0")/lib/init.sh"
+if [ -f "$(dirname "$0")/files/init.sh" ]; then
+    source "$(dirname "$0")/files/init.sh"
 fi
-if [ -f "$(dirname "$0")/lib/service.sh" ]; then
-    source "$(dirname "$0")/lib/service.sh"
+if [ -f "$(dirname "$0")/files/service.sh" ]; then
+    source "$(dirname "$0")/files/service.sh"
 fi
-if [ -f "$(dirname "$0")/lib/install.sh" ]; then
-    source "$(dirname "$0")/lib/install.sh"
+if [ -f "$(dirname "$0")/files/install.sh" ]; then
+    source "$(dirname "$0")/files/install.sh"
 fi
-if [ -f "$(dirname "$0")/lib/config.sh" ]; then
-    source "$(dirname "$0")/lib/config.sh"
+if [ -f "$(dirname "$0")/files/config.sh" ]; then
+    source "$(dirname "$0")/files/config.sh"
 fi
-if [ -f "$(dirname "$0")/lib/menu.sh" ]; then
-    source "$(dirname "$0")/lib/menu.sh"
+if [ -f "$(dirname "$0")/files/menu.sh" ]; then
+    source "$(dirname "$0")/files/menu.sh"
 fi
 
 set -e  
