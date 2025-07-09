@@ -8,7 +8,7 @@ install_dependencies() {
     if [ "$kernel" = "Linux" ]; then
         [ -f /etc/os-release ] && . /etc/os-release || { echo "Не удалось определить ОС"; exit 1; }
 
-        SUDO="${SUDO:-}"t
+        SUDO="${SUDO:-}"
 
         find_package_manager() {
             case "$1" in
