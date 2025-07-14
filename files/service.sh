@@ -48,7 +48,11 @@ manage_autostart() {
             fi
             ;;
         openrc)
-            service zapret "$1"
+            if [[ "$1" == "enable" ]]; then
+                rc-update add zapret default
+            else
+                rc-update del zapret
+            fi
             ;;
         procd)
             service zapret "$1"
@@ -230,7 +234,7 @@ detect_init() {
         INIT_SYSTEM="systemd"
     elif [ $SYSTEM == openwrt ]; then
         INIT_SYSTEM="procd"
-    elif command -v openrc-init >/dev/null 2>&1; then
+    elif command -v openrc >/dev/null 2>&1; then
         INIT_SYSTEM="openrc"
     elif command -v runit >/dev/null 2>&1; then
         INIT_SYSTEM="runit"
