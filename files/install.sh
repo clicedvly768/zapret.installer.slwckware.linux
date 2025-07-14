@@ -65,28 +65,47 @@ install_zapret() {
                 ;;
         esac
     fi
-    echo "Клонирую репозиторий..."
-    sleep 2
-    git clone https://github.com/bol-van/zapret /opt/zapret
-    echo "Клонирую репозиторий..."
-    git clone https://github.com/Snowy-Fluffy/zapret.cfgs /opt/zapret/zapret.cfgs
-    echo "Клонирование успешно завершено."
-    rm -rf /opt/zapret/binaries
-    echo -e "\e[45mКлонирую релиз запрета...\e[0m"
-    if [[ ! -d /opt/zapret.installer/zapret.binaries/ ]]; then
-        rm -rf /opt/zapret.installer/zapret.binaries/
+    if [ SYSTEM = openwrt ]; then
+        echo "Получаю релиз запрета..."
+        sleep 2
+        mkdir -p /tmp/zapret_download
+        cd /tmp/zapret_download || error_exit "Не удалось перейти в /tmp/zapret_download"
+        if ! curl -L -o https://github.com/bol-van/zapret/releases/download/v71.1.1/zapret-v71.1.1.tar.gz; then
+            rm -rf /tmp/zapret_download
+            error_exit "Не удалось получить релиз запрета."
+        fi
+        mkdir -p /opt/zapret
+        if ! tar -xzf zapret-v71.1.1.tar.gz -C /opt/zapret --strip-components=1; then
+            rm -rf /tmp/zapret_download /opt/zapret
+            error_exit "Не удалось разархивировать архив с релизом запрета."
+        fi
+        git clone https://github.com/Snowy-Fluffy/zapret.cfgs /opt/zapret/zapret.cfgs
+        rm -rf /tmp/zapret_download   
+    else
+        echo "Клонирую репозиторий..."
+        sleep 2
+        git clone https://github.com/bol-van/zapret /opt/zapret
+        echo "Клонирую репозиторий..."
+        git clone https://github.com/Snowy-Fluffy/zapret.cfgs /opt/zapret/zapret.cfgs
+        echo "Клонирование успешно завершено."
+        rm -rf /opt/zapret/binaries
+        echo -e "\e[45mКлонирую релиз запрета...\e[0m"
+        if [[ ! -d /opt/zapret.installer/zapret.binaries/ ]]; then
+            rm -rf /opt/zapret.installer/zapret.binaries/
+        fi
+        mkdir -p /opt/zapret.installer/zapret.binaries/zapret
+        if ! curl -L -o /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1.tar.gz https://github.com/bol-van/zapret/releases/download/v71.1.1/zapret-v71.1.1.tar.gz; then
+            rm -rf /opt/zapret /tmp/zapret
+            error_exit "не удалось получить релиз запрета."
+        fi
+        echo "Получение запрета завершено."
+        if ! tar -xzf /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1.tar.gz -C /opt/zapret.installer/zapret.binaries/zapret/; then
+            rm -rf /opt/zapret.installer/
+            error_exit "не удалось разархивировать архив с релизом запрета."
+        fi
+        cp -r /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1/binaries/ /opt/zapret/binaries
     fi
-    mkdir -p /opt/zapret.installer/zapret.binaries/zapret
-    if ! curl -L -o /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1.tar.gz https://github.com/bol-van/zapret/releases/download/v71.1.1/zapret-v71.1.1.tar.gz; then
-        rm -rf /opt/zapret /tmp/zapret
-        error_exit "не удалось получить релиз запрета."
-    fi
-    echo "Получение запрета завершено."
-    if ! tar -xzf /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1.tar.gz -C /opt/zapret.installer/zapret.binaries/zapret/; then
-        rm -rf /opt/zapret.installer/
-        error_exit "не удалось разархивировать архив с релизом запрета."
-    fi
-    cp -r /opt/zapret.installer/zapret.binaries/zapret/zapret-v71.1.1/binaries/ /opt/zapret/binaries
+
     cd /opt/zapret
     sed -i '238s/ask_yes_no N/ask_yes_no Y/' /opt/zapret/common/installer.sh
     yes "" | ./install_easy.sh

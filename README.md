@@ -30,9 +30,12 @@ zapret
 - Alt Linux
 - Void Linux
 - Gentoo Linux
-- OpenWrt
 - OpenSUSE
 - Aipline Linux
+- OpenWrt
+
+> [!IMPORTANT]
+> На Openwrt также советую попробовать (zapret-openwrt)[https://github.com/remittor/zapret-openwrt]
 
 > [!IMPORTANT]
 > Системы инициализации *runit*, *OpenRC* и *SysVinit* поддерживаются только частично.
