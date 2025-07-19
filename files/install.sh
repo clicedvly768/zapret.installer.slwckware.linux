@@ -118,6 +118,7 @@ install_zapret() {
     rm -f /opt/zapret/ipset/zapret-hosts-user.txt
     cp -r /opt/zapret/zapret.cfgs/lists/list-basic.txt /opt/zapret/ipset/zapret-hosts-user.txt || error_exit "не удалось автоматически скопировать хостлист"
     cp -r /opt/zapret/zapret.cfgs/lists/ipset-discord.txt /opt/zapret/ipset/ipset-discord.txt || error_exit "не удалось автоматически скопировать ипсет"
+    ln -s /opt/zapret.installer/zapret-control.sh /bin/zapret || error_exit "не удалось создать символическую ссылку"
     if [[ INIT_SYSTEM = systemd ]]; then
         systemctl daemon-reload
     fi
